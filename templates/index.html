@@ -7,7 +7,7 @@
         <p class="lead">O mais simples do mundo</p>
     </header>
 
-    {% set blog_section = get_section(path="blog/_index.md") %}
+    {% set blog_section = get_section(path="posts/_index.md") %}
     {% for year, posts in blog_section.pages | group_by(attribute="year") %}
         <div class="card mb-4 shadow-sm">
             <div class="card-header bg-primary text-white">
