@@ -1,8 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  This is my blog made with Zola.
-</h1>
-<p><a href="{{ get_url(path='@/blog/_index.md') }}">Posts</a>.</p>
+<div class="container mt-5">
+    <header class="text-center mb-5">
+        <h1 class="display-4">Meu Blog</h1>
+        <p class="lead">O mais simples do mundo</p>
+    </header>
+
+    {% set blog_section = get_section(path="blog/_index.md") %}
+    {% for year, posts in blog_section.pages | group_by(attribute="year") %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h5 mb-0">{{ year }}</h2>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for post in posts %}
+                    <li class="list-group-item">
+                        <a href="{{ post.permalink }}" class="text-decoration-none fw-bold">{{ post.title }}</a>
+                        <span class="text-muted d-block small">{{ post.date | date(format="%Y-%m-%d") }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}
+
