@@ -1,0 +1,7 @@
+@import 'custom';
+
+:root {
+  @each $spacer, $value in $spacers {
+    --theme-spacer-#{$spacer}: #{$value};
+  }
+}

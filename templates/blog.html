@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-primary text-center">{{ section.title }}</h1>
+  <div class="row mt-4">
+    {% for page in section.pages %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm h-100">
+        {% if page.extra.image %}
+        <img src="{{ page.extra.image }}" class="card-img-top" alt="{{ page.title }}">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ page.title }}</h5>
+          <p class="card-text text-muted">{{ page.summary | safe }}</p>
+          <a href="{{ page.permalink | safe }}" class="btn btn-primary mt-auto">Read more</a>
+        </div>
+        <div class="card-footer text-muted small text-end">
+          {{ page.date }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
+
