@@ -5,6 +5,20 @@
     <div class="container">
         <div class="row justify-content-center ">
             <div class="col-lg-8">
+                <ul class="list-inline list-separator list-separator-light mb-4">
+                    {% for taxonomy, terms in page.taxonomies %}
+                        {% if taxonomy == "categories" %}
+                            {% for term in terms %}
+                                <li class="list-inline-item">
+                                    <a class="text-uppercase link-light small" href="">{{ term }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    <li class="list-inline-item">
+                        <span class="text-uppercase text-light small">{{ page.reading_time }} min read</span>
+                    </li>
+                </ul>
                 <div class="mb-6">
                     <h1 class="h2 text-black">{{ page.title }}</h1>
                     <p class="text-black"></p>
