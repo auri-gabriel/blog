@@ -1,28 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-5">
-    <header class="text-center mb-5">
-        <h1 class="display-4">Meu Blog</h1>
-        <p class="lead">O mais simples do mundo</p>
-    </header>
+<div class="container py-5">
+  <header class="text-center mb-5">
+    <h1 class="display-3 fw-bold text-primary">Meu Blog</h1>
+    <p class="lead text-muted">O mais simples do mundo</p>
+  </header>
 
-    {% set blog_section = get_section(path="posts/_index.md") %}
-    {% for year, posts in blog_section.pages | group_by(attribute="year") %}
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header bg-primary text-white">
-                <h2 class="h5 mb-0">{{ year }}</h2>
-            </div>
-            <ul class="list-group list-group-flush">
-                {% for post in posts %}
-                    <li class="list-group-item">
-                        <a href="{{ post.permalink }}" class="text-decoration-none fw-bold">{{ post.title }}</a>
-                        <span class="text-muted d-block small">{{ post.date | date(format="%Y-%m-%d") }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
+  {% set blog_section = get_section(path="posts/_index.md") %}
+  {% for year, posts in blog_section.pages | group_by(attribute="year") %}
+    <div class="card mb-5 shadow-lg border-0">
+      <div class="card-header bg-gradient bg-primary text-white py-3">
+        <h2 class="h5 m-0 fw-semibold">{{ year }}</h2>
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for post in posts %}
+        <li class="list-group-item d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
+          <div>
+            <a href="{{ post.permalink }}" class="text-decoration-none link-dark fw-semibold hover-underline">
+              {{ post.title }}
+            </a>
+            <div class="text-muted small">{{ post.date | date(format="%Y-%m-%d") }}</div>
+          </div>
+          <a href="{{ post.permalink }}" class="btn btn-sm btn-outline-primary">Ler mais</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
 </div>
+
+<style>
+  .hover-underline:hover {
+    text-decoration: underline;
+  }
+
+  .card {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+</style>
 {% endblock content %}
 

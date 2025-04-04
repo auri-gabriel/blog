@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-5">
-  <h1 class="text-primary text-center">{{ section.title }}</h1>
-  <div class="row mt-4">
+<div class="container py-5">
+  <h1 class="display-4 text-center text-primary fw-bold mb-5">{{ section.title }}</h1>
+  
+  <div class="row g-4">
     {% for page in section.pages %}
-    <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card shadow-sm h-100">
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow border-0 transition-transform hover-shadow">
         {% if page.extra.image %}
-        <img src="{{ page.extra.image }}" class="card-img-top" alt="{{ page.title }}">
+        <img src="{{ page.extra.image }}" class="card-img-top rounded-top" alt="{{ page.title }}">
         {% endif %}
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ page.title }}</h5>
-          <p class="card-text text-muted">{{ page.summary | safe }}</p>
-          <a href="{{ page.permalink | safe }}" class="btn btn-primary mt-auto">Read more</a>
+          <h5 class="card-title fw-semibold">{{ page.title }}</h5>
+          <p class="card-text text-muted small flex-grow-1">{{ page.summary | safe }}</p>
+          <a href="{{ page.permalink | safe }}" class="btn btn-outline-primary mt-3">Read more</a>
         </div>
-        <div class="card-footer text-muted small text-end">
+        <div class="card-footer bg-white border-top-0 text-muted small text-end">
           {{ page.date }}
         </div>
       </div>
@@ -23,5 +24,12 @@
     {% endfor %}
   </div>
 </div>
+
+<style>
+  .hover-shadow:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+  }
+</style>
 {% endblock content %}
 
