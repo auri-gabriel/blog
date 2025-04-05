@@ -1,6 +1,5 @@
-$primary: #FBBE44;;
+@import "custom-variables";
 
-$primary: mix(black, $primary, 20%);
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons";
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
