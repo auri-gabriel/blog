@@ -1,19 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-lg-8">
+            <div class="py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        {% set home = get_section(path="_index.md") %}
+                        <li class="breadcrumb-item"><a href="{{ home.permalink }}">{{ home.title }}</a></li>
+                        {% set posts_section = get_section(path="posts/_index.md") %}
+                        <li class="breadcrumb-item"><a
+                                href="{{ posts_section.permalink }}">{{ posts_section.title }}</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="bg-primary py-lg-20 py-10">
     <div class="container">
         <div class="row justify-content-center ">
             <div class="col-lg-8">
                 <ul class="list-inline list-separator list-separator-light mb-4">
                     {% for taxonomy, terms in page.taxonomies %}
-                        {% if taxonomy == "categories" %}
-                            {% for term in terms %}
-                                <li class="list-inline-item">
-                                    <a class="text-uppercase link-light small" href="">{{ term }}</a>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
+                    {% if taxonomy == "categories" %}
+                    {% for term in terms %}
+                    <li class="list-inline-item">
+                        <a class="text-uppercase link-light small" href="">{{ term }}</a>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
                     {% endfor %}
                     <li class="list-inline-item">
                         <span class="text-uppercase text-light small">{{ page.reading_time }} min read</span>
