@@ -1,47 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container py-5">
-  <header class="text-center mb-5">
-    <h1 class="display-3 fw-bold text-primary">Meu Blog</h1>
-    <p class="lead text-muted">O mais simples do mundo</p>
-  </header>
+<div class="container">
+    <header class="text-center my-5">
+        <h1 class="display-3 fw-bold text-primary">Meu Blog</h1>
+        <p class="lead text-muted">O mais simples do mundo</p>
+    </header>
 
-  {% set blog_section = get_section(path="posts/_index.md") %}
-  {% for year, posts in blog_section.pages | group_by(attribute="year") %}
-    <div class="card mb-5 shadow-lg border-0">
-      <div class="card-header bg-gradient bg-primary text-white py-3">
-        <h2 class="h5 m-0 fw-semibold">{{ year }}</h2>
-      </div>
-      <ul class="list-group list-group-flush">
-        {% for post in posts %}
-        <li class="list-group-item d-flex justify-content-between align-items-center flex-column flex-sm-row gap-2">
-          <div>
-            <a href="{{ post.permalink }}" class="text-decoration-none link-dark fw-semibold hover-underline">
-              {{ post.title }}
-            </a>
-            <div class="text-muted small">{{ post.date | date(format="%Y-%m-%d") }}</div>
-          </div>
-          <a href="{{ post.permalink }}" class="btn btn-sm btn-outline-primary">Ler mais</a>
-        </li>
+    <div class="row mb-2">
+        {% set blog_section = get_section(path="posts/_index.md") %}
+        {% for post in blog_section.pages %}
+        <div class="col-md-4">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">{{ post.title }}</h3>
+                    <div class="mb-1 text-body-secondary">{{ post.date }}</div>
+                    <p class="mb-auto">{{ post.summary }}</p>
+                    <a href="{{post.permalink}}" class="icon-link gap-1 icon-link-hover stretched-link">
+                        Continue reading
+                    </a>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-      </ul>
     </div>
-  {% endfor %}
 </div>
 
 <style>
-  .hover-underline:hover {
-    text-decoration: underline;
-  }
+    .hover-underline:hover {
+        text-decoration: underline;
+    }
 
-  .card {
-    transition: box-shadow 0.3s ease;
-  }
+    .card {
+        transition: box-shadow 0.3s ease;
+    }
 
-  .card:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  }
+    .card:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
 </style>
 {% endblock content %}
-
