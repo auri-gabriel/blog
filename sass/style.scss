@@ -23,6 +23,12 @@ body {
 
 .site-main {
   flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main > * {
+  width: 100%;
 }
 
 body > footer {
@@ -31,6 +37,9 @@ body > footer {
 
 .post-page {
   background: #fff;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .post-header-inner,
@@ -107,6 +116,7 @@ body > footer {
 
 .post-body {
   background: #fff;
+  flex: 1 0 auto;
 }
 
 .post-prose {
