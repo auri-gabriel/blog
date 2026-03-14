@@ -1,8 +1,14 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% set taxonomy_label =
+taxonomy.name %} {% if taxonomy.name == "categories" %} {% set taxonomy_label =
+trans(key="nav_categories", lang=lang) | lower %} {% elif taxonomy.name ==
+"tags" %} {% set taxonomy_label = trans(key="nav_tags", lang=lang) | lower %} {%
+endif %}
 <section class="bg-light py-5 border-bottom">
   <div class="container">
     <h1 class="display-6 fw-bold mb-2">{{ taxonomy.name | title }}</h1>
-    <p class="text-muted mb-0">Browse posts by {{ taxonomy.name }}.</p>
+    <p class="text-muted mb-0">
+      {{ trans(key="taxonomy_browse_by", lang=lang) }} {{ taxonomy_label }}.
+    </p>
   </div>
 </section>
 
@@ -19,7 +25,7 @@
             <p class="post-card-meta mb-2">{{ taxonomy.name | title }}</p>
             <h2 class="post-card-title h5 mb-1">{{ term.name }}</h2>
             <p class="post-card-excerpt mb-0 small">
-              {{ term.pages | length }} post(s)
+              {{ term.pages | length }} {{ trans(key="post_count", lang=lang) }}
             </p>
           </div>
         </a>

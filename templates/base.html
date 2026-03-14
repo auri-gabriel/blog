@@ -89,7 +89,7 @@
         <a
           class="navbar-brand d-flex align-items-center fw-bold text-decoration-none"
           href="{{ home_url }}"
-          title="Auri's Blog"
+          title="{{ trans(key="nav_brand_title", lang=lang) }}"
         >
           <h1 class="mb-0">
             <span
@@ -108,7 +108,7 @@
               hyphens: auto;
               white-space: normal;
             "
-            >Auri's Blog · Software Engineering Notes</span
+            >{{ trans(key="nav_brand_subtitle", lang=lang) }}</span
           >
         </a>
 
@@ -119,7 +119,7 @@
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label="{{ trans(key="nav_toggle", lang=lang) }}"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -127,19 +127,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ home_url }}">Home</a>
+              <a class="nav-link" href="{{ home_url }}">{{ trans(key="nav_home", lang=lang) }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ posts_url }}">Posts</a>
+              <a class="nav-link" href="{{ posts_url }}">{{ trans(key="nav_posts", lang=lang) }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ categories_url }}">Categories</a>
+              <a class="nav-link" href="{{ categories_url }}">{{ trans(key="nav_categories", lang=lang) }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ tags_url }}">Tags</a>
+              <a class="nav-link" href="{{ tags_url }}">{{ trans(key="nav_tags", lang=lang) }}</a>
             </li>
             <li class="nav-item d-flex align-items-center ms-lg-3">
-              <div class="btn-group btn-group-sm" role="group" aria-label="Language switcher">
+              <div class="btn-group btn-group-sm" role="group" aria-label="{{ trans(key="lang_switcher_label", lang=lang) }}">
                 <a href="{{ en_switch_url }}" class="btn {% if lang == "en" %}btn-primary{% else %}btn-outline-secondary{% endif %}">EN</a>
                 <a href="{{ pt_switch_url }}" class="btn {% if lang == "pt-br" %}btn-primary{% else %}btn-outline-secondary{% endif %}">PT-BR</a>
               </div>

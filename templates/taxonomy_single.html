@@ -1,8 +1,15 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% set taxonomy_label =
+taxonomy.name %} {% if taxonomy.name == "categories" %} {% set taxonomy_label =
+trans(key="nav_categories", lang=lang) | lower %} {% elif taxonomy.name ==
+"tags" %} {% set taxonomy_label = trans(key="nav_tags", lang=lang) | lower %} {%
+endif %} {% set date_format_short = "%b %d, %Y" %} {% if lang == "pt-br" %} {%
+set date_format_short = "%d/%m/%Y" %} {% endif %}
 <section class="bg-light py-5 border-bottom">
   <div class="container">
     <h1 class="display-6 fw-bold mb-2">{{ term.name }}</h1>
-    <p class="text-muted mb-0">Posts in this {{ taxonomy.name | lower }}.</p>
+    <p class="text-muted mb-0">
+      {{ trans(key="taxonomy_posts_in", lang=lang) }} {{ taxonomy_label }}.
+    </p>
   </div>
 </section>
 
@@ -16,7 +23,7 @@
         >
           <div class="card-body d-flex flex-column">
             <p class="post-card-meta mb-2">
-              {{ page.date | date(format="%b %d, %Y") }}
+              {{ page.date | date(format=date_format_short) }}
             </p>
             <h2 class="post-card-title h4 mb-2">{{ page.title }}</h2>
             {% if page.summary %}
@@ -31,7 +38,7 @@
             <a
               href="{{ page.permalink }}"
               class="stretched-link fw-semibold text-decoration-none post-card-link"
-              >Read more →</a
+              >{{ trans(key="read_more", lang=lang) }} →</a
             >
           </div>
         </div>
