@@ -14,7 +14,7 @@
                     {% if page.taxonomies.categories %}
                     <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0], lang=page.lang) }}" class="post-kicker text-decoration-none">{{ page.taxonomies.categories[0] }}</a>
                     {% else %}
-                    <a href="{{ posts_url }}" class="post-kicker text-decoration-none">{{ trans(key="nav_posts", lang=lang) }}</a>
+                    <a href="{{ posts_url }}" class="post-kicker text-decoration-none">{{ i18n.nav_posts }}</a>
                     {% endif %}
                 </div>
 
@@ -27,15 +27,15 @@
                 <div class="post-byline-wrap pt-3 border-top">
                     <div class="post-byline">
                         {% if page.authors and page.authors | length > 0 %}
-                        <span>{{ trans(key="post_by", lang=lang) }} {{ page.authors | join(sep=", ") }}</span>
+                        <span>{{ i18n.post_by }} {{ page.authors | join(sep=", ") }}</span>
                         {% else %}
-                        <span>{{ trans(key="post_by", lang=lang) }} {{ trans(key="post_editorial_team", lang=lang) }}</span>
+                        <span>{{ i18n.post_by }} {{ i18n.post_editorial_team }}</span>
                         {% endif %}
                     </div>
                     <div class="post-meta text-muted">
                         <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
                         <span aria-hidden="true">•</span>
-                        <span>{{ page.reading_time }} {{ trans(key="post_min_read", lang=lang) }}</span>
+                        <span>{{ page.reading_time }} {{ i18n.post_min_read }}</span>
                     </div>
                 </div>
 
@@ -58,13 +58,13 @@
                 </div>
 
                 <footer class="post-endnote mt-5 pt-3 border-top">
-                    <a href="{{ posts_url }}" class="text-decoration-none">← {{ trans(key="post_back_to_posts", lang=lang) }}</a>
+                    <a href="{{ posts_url }}" class="text-decoration-none">← {{ i18n.post_back_to_posts }}</a>
                 </footer>
             </div>
 
             {% if page.taxonomies.categories or page.taxonomies.tags %}
             <div class="post-topic-bar mx-auto mt-5 pt-3 border-top">
-                <p class="text-uppercase text-muted small fw-semibold mb-2">{{ trans(key="post_filed_under", lang=lang) }}</p>
+                <p class="text-uppercase text-muted small fw-semibold mb-2">{{ i18n.post_filed_under }}</p>
                 <div class="d-flex flex-wrap gap-2">
                     {% if page.taxonomies.categories %}
                     {% for term in page.taxonomies.categories %}

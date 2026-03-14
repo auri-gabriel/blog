@@ -12,6 +12,11 @@
   </head>
 
   <body>
+    {% set i18n = load_data(path="i18n/en.toml") %}
+    {% if lang == "pt-br" %}
+      {% set i18n = load_data(path="i18n/pt-br.toml") %}
+    {% endif %}
+
     {% set is_pt = lang == "pt-br" %}
     {% set home_url = "/" %}
     {% set posts_url = "/posts/" %}
@@ -89,7 +94,7 @@
         <a
           class="navbar-brand d-flex align-items-center fw-bold text-decoration-none"
           href="{{ home_url }}"
-          title="{{ trans(key="nav_brand_title", lang=lang) }}"
+          title="{{ i18n.nav_brand_title }}"
         >
           <h1 class="mb-0">
             <span
@@ -108,7 +113,7 @@
               hyphens: auto;
               white-space: normal;
             "
-            >{{ trans(key="nav_brand_subtitle", lang=lang) }}</span
+            >{{ i18n.nav_brand_subtitle }}</span
           >
         </a>
 
@@ -119,7 +124,7 @@
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="{{ trans(key="nav_toggle", lang=lang) }}"
+          aria-label="{{ i18n.nav_toggle }}"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -127,19 +132,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ home_url }}">{{ trans(key="nav_home", lang=lang) }}</a>
+              <a class="nav-link" href="{{ home_url }}">{{ i18n.nav_home }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ posts_url }}">{{ trans(key="nav_posts", lang=lang) }}</a>
+              <a class="nav-link" href="{{ posts_url }}">{{ i18n.nav_posts }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ categories_url }}">{{ trans(key="nav_categories", lang=lang) }}</a>
+              <a class="nav-link" href="{{ categories_url }}">{{ i18n.nav_categories }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="{{ tags_url }}">{{ trans(key="nav_tags", lang=lang) }}</a>
+              <a class="nav-link" href="{{ tags_url }}">{{ i18n.nav_tags }}</a>
             </li>
             <li class="nav-item d-flex align-items-center ms-lg-3">
-              <div class="btn-group btn-group-sm" role="group" aria-label="{{ trans(key="lang_switcher_label", lang=lang) }}">
+              <div class="btn-group btn-group-sm" role="group" aria-label="{{ i18n.lang_switcher_label }}">
                 <a href="{{ en_switch_url }}" class="btn {% if lang == "en" %}btn-primary{% else %}btn-outline-secondary{% endif %}">EN</a>
                 <a href="{{ pt_switch_url }}" class="btn {% if lang == "pt-br" %}btn-primary{% else %}btn-outline-secondary{% endif %}">PT-BR</a>
               </div>

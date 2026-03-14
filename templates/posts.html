@@ -4,7 +4,7 @@ endif %}
 <section class="bg-light py-5 border-bottom">
   <div class="container">
     <h1 class="display-6 fw-bold mb-2">{{ section.title }}</h1>
-    <p class="text-muted mb-0">{{ trans(key="posts_intro", lang=lang) }}</p>
+    <p class="text-muted mb-0">{{ i18n.posts_intro }}</p>
   </div>
 </section>
 
@@ -33,7 +33,7 @@ endif %}
             <a
               href="{{ page.permalink }}"
               class="stretched-link fw-semibold text-decoration-none post-card-link"
-              >{{ trans(key="read_more", lang=lang) }} →</a
+              >{{ i18n.read_more }} →</a
             >
           </div>
         </div>
