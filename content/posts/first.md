@@ -1,105 +1,81 @@
 +++
-title = "Engineering Journal: Building a Personal Blog Like a Product"
-date = 2026-03-10
-translation_key = "engineering-journal-product-blog"
+title = "Why I Chose Zola for a Professional Engineering Blog"
+date = 2026-03-14
+translation_key = "why-i-chose-zola"
 authors = ["Auri Gabriel"]
 [taxonomies]
 categories = ["Development", "Architecture"]
-tags = ["zola", "frontend", "ux", "writing"]
+tags = ["zola", "blogging", "engineering", "workflow"]
 [extra]
-lead = "A long-form test article about designing a blog with production-quality structure, typography, and developer ergonomics."
+lead = "A practical write-up on why I adopted Zola, what trade-offs I accepted, and how I plan to evolve this blog over time."
 +++
 
-When I started this blog I treated it like a side project. After a few iterations, I realized I should treat it like a product: define a clear reading experience, test assumptions with realistic content, and optimize for maintainability. This post is intentionally long so I can evaluate the page style under real-world reading conditions.
+I wanted a blog that feels fast, simple to maintain, and focused on writing. I evaluated multiple options and chose Zola because it gives me a clean static workflow without JavaScript framework overhead.
 
-## Why this article exists
+This is the first real post of the blog. Instead of discussing theme experiments, I want to document concrete engineering decisions and the reasoning behind them.
 
-The initial layout looked acceptable with short content, but real posts quickly exposed issues:
+## What I needed from a blog stack
 
-- inconsistent spacing between sections
-- weak contrast in long paragraphs
-- metadata and taxonomy treatment competing with the article body
-- code blocks and tables feeling disconnected from text rhythm
+Before picking a stack, I listed non-negotiables:
 
-The goal is not to over-design. The goal is to make writing and reading feel calm, structured, and intentional.
+- fast build and deploy cycle
+- Markdown-first authoring
+- excellent static output and SEO friendliness
+- minimal runtime dependencies
+- easy multilingual support
 
-## Editorial constraints
+Zola checks all of those boxes while staying lightweight.
 
-To keep this blog maintainable, I use a small set of constraints:
+## Why Zola won
 
-1. Content first: every design decision should improve readability.
-2. Predictable hierarchy: headline → deck → body → secondary metadata.
-3. Reasonable defaults: no per-post CSS hacks.
-4. Progressive enhancement: works without JavaScript for core reading.
+The biggest advantage for me is the clarity of the development model:
 
-> A good blog theme is not one that looks complex. It is one that disappears while the content does the work.
+1. write content in Markdown
+2. structure using templates
+3. style with Sass
+4. publish static files
 
-## Example architecture notes
+That flow is hard to beat for personal publishing.
 
-At the project level, I keep a simple structure:
+I also liked the built-in support for taxonomies, pagination, and multilingual sites without introducing plugin complexity.
 
-- `templates/` for layout and page composition
-- `sass/` for shared visual language
-- `content/posts/` for editorial content only
+## Trade-offs I accepted
 
-This separation lets me iterate quickly without mixing concerns.
+No stack is perfect. With Zola, I accepted:
 
-### Build pipeline checklist
+- fewer ecosystem plugins compared to larger CMS tools
+- more manual template work for highly custom UX
+- the need for clear content conventions as the site grows
 
-Before publishing, I validate these points:
+For this blog, those trade-offs are acceptable.
 
-| Check | Why it matters | Status |
-| --- | --- | --- |
-| `zola build` passes | Prevent broken deploys | ✅ |
-| typography on long posts | Real reading comfort | ✅ |
-| code blocks on mobile | Developer audience | ✅ |
-| metadata clarity | Scannability | ✅ |
+## Current publishing workflow
 
-## Sample code block for style testing
+My current routine is intentionally simple:
 
-```rust
-#[derive(Debug)]
-struct PostMeta {
-	title: String,
-	reading_time_min: usize,
-	tags: Vec<String>,
-}
+```bash
+# local preview
+zola serve
 
-fn estimate_reading_time(words: usize) -> usize {
-	let words_per_minute = 220;
-	((words as f32) / (words_per_minute as f32)).ceil() as usize
-}
-
-fn main() {
-	let words = 1420;
-	let reading_time = estimate_reading_time(words);
-	println!("Estimated reading time: {reading_time} min");
-}
+# production validation
+zola build
 ```
 
-The code above is not complex, but it is enough to test line height, horizontal overflow behavior, and syntax highlighting balance.
+I only publish when build passes and the article reads well in both desktop and mobile layouts.
 
-## Paragraph rhythm stress test
+## What comes next
 
-This section exists only to verify the vertical rhythm. In practice, technical writing alternates between conceptual explanation and implementation detail. The template needs to support both without creating visual fatigue.
+Now that the foundation is stable, upcoming posts will focus on:
 
-A readable blog body gives breathing room between ideas, but it does not waste space. It should feel deliberate: dense enough for technical readers, open enough for scanning. If a user lands on this page from search, they should be able to quickly find headings, code, and summary points.
+- frontend architecture decisions
+- practical TypeScript patterns
+- CI/CD and developer experience notes
+- real migration stories and lessons learned
 
-Another important detail is link styling. Links should remain visible without looking noisy. Underlines are useful for accessibility and clarity, especially in long documents where color alone is not enough.
+The goal is consistency: fewer random experiments, more useful technical content.
 
-### Practical migration note
+## Final note
 
-If you are refactoring a theme, avoid big-bang rewrites. Move in small slices:
+Choosing tools is less about trends and more about constraints. For this blog, Zola gives me the right balance of speed, control, and simplicity.
 
-1. lock the structure
-2. tune typography
-3. improve components (cards, taxonomy, metadata)
-4. validate with long content
 
-This incremental approach reduces regressions and gives faster feedback loops.
-
-## Final takeaway
-
-This article is intentionally verbose to test layout under realistic conditions. If this page feels stable, readable, and professional, the theme is likely in a good baseline state for real publishing.
-
-Next iteration will focus on author profile blocks, related posts, and subtle improvements to navigation density.

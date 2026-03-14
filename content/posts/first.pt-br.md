@@ -1,41 +1,81 @@
 +++
-title = "Diário de Engenharia: Construindo um Blog Pessoal Como Produto"
-date = 2026-03-10
-translation_key = "engineering-journal-product-blog"
+title = "Por que escolhi o Zola para um blog profissional de engenharia"
+date = 2026-03-14
+translation_key = "why-i-chose-zola"
 authors = ["Auri Gabriel"]
 
 [taxonomies]
 categories = ["Desenvolvimento", "Arquitetura"]
-tags = ["zola", "frontend", "ux", "escrita"]
+tags = ["zola", "blog", "engenharia", "workflow"]
 
 [extra]
-lead = "Versão em português de um artigo longo para testar tipografia, estrutura e experiência de leitura."
+lead = "Um relato prático sobre por que adotei o Zola, quais trade-offs aceitei e como pretendo evoluir este blog."
 +++
 
-Quando comecei este blog, tratei tudo como um experimento rápido. Depois de algumas iterações, ficou claro que o caminho certo era tratar o blog como produto: definir uma experiência de leitura consistente, validar decisões com conteúdo real e manter o projeto sustentável.
+Eu queria um blog rápido, simples de manter e centrado em escrita. Avaliei algumas opções e escolhi o Zola porque ele oferece um fluxo estático limpo, sem overhead de frameworks JavaScript no runtime.
 
-## Por que este artigo existe
+Este é o primeiro post real do blog. Em vez de focar em testes visuais, quero registrar decisões técnicas concretas e o raciocínio por trás delas.
 
-Com posts curtos, quase qualquer layout parece funcionar. Com posts longos, os problemas aparecem:
+## O que eu precisava de uma stack para blog
 
-- espaçamento inconsistente entre seções
-- contraste fraco em parágrafos longos
-- metadados competindo com o conteúdo
-- blocos de código sem integração com o ritmo do texto
+Antes de escolher a stack, defini alguns requisitos não negociáveis:
 
-Este texto é propositalmente longo para testar tudo isso.
+- build e deploy rápidos
+- escrita em Markdown sem fricção
+- saída estática excelente para SEO
+- poucas dependências em runtime
+- suporte simples a múltiplos idiomas
 
-## Resumo da abordagem
+O Zola atende esses pontos com ótima relação entre simplicidade e controle.
 
-Para manter o tema limpo e profissional:
+## Por que o Zola venceu
 
-1. conteúdo em primeiro lugar
-2. hierarquia clara de título, subtítulo e corpo
-3. estilos previsíveis para links, listas e código
-4. validação contínua com `zola build`
+A principal vantagem para mim foi a clareza do modelo de desenvolvimento:
 
-> Um bom tema não chama atenção para si; ele ajuda o leitor a focar no que importa.
+1. escrever conteúdo em Markdown
+2. estruturar com templates
+3. estilizar com Sass
+4. publicar arquivos estáticos
 
-## Conclusão
+Esse fluxo é direto e eficiente para um blog técnico pessoal.
 
-Este é um exemplo de post traduzido. A versão em inglês e a versão em português compartilham o mesmo `translation_key`, então o Zola entende que são equivalentes entre idiomas.
+Também gostei do suporte nativo a taxonomias, paginação e multilíngue sem depender de um ecossistema de plugins pesado.
+
+## Trade-offs que eu aceitei
+
+Nenhuma stack é perfeita. Com Zola, os trade-offs foram:
+
+- menos plugins prontos do que algumas plataformas maiores
+- mais trabalho manual de template para UX muito customizada
+- necessidade de manter convenções de conteúdo bem definidas
+
+Para este projeto, esses pontos são aceitáveis.
+
+## Fluxo atual de publicação
+
+Hoje meu processo está assim:
+
+```bash
+# preview local
+zola serve
+
+# validação para publicar
+zola build
+```
+
+Só publico quando o build passa e o artigo está bom em desktop e mobile.
+
+## Próximos temas do blog
+
+Com a base estável, os próximos posts vão focar em:
+
+- decisões de arquitetura frontend
+- padrões práticos de TypeScript
+- CI/CD e experiência de desenvolvimento
+- histórias reais de migração e lições aprendidas
+
+A meta é consistência: menos experimentos aleatórios, mais conteúdo técnico útil.
+
+## Nota final
+
+Escolher ferramenta é menos sobre hype e mais sobre restrições reais. Para este blog, o Zola me dá o equilíbrio certo entre velocidade, controle e simplicidade.
