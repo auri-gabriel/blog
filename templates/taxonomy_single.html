@@ -1,12 +1,41 @@
-{% extends "index.html" %}
+{% extends "base.html" %} {% block content %}
+<section class="py-5 border-bottom">
+  <div class="container">
+    <h1 class="display-6 fw-bold mb-2">{{ term.name }}</h1>
+    <p class="text-muted mb-0">Posts in this {{ taxonomy.name | lower }}.</p>
+  </div>
+</section>
 
-{% block content %}
-<h1>{{ term.name }}</h1>
-<p>Posts tagged with "{{ term.name }}":</p>
-<ul>
-    {% for page in term.pages %}
-        <li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
-    {% endfor %}
-</ul>
-{% endblock %}
-
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      {% for page in term.pages %}
+      <article class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm post-card">
+          <div class="card-body d-flex flex-column">
+            <p class="text-muted small mb-2">
+              {{ page.date | date(format="%b %d, %Y") }}
+            </p>
+            <h2 class="h4 mb-2">{{ page.title }}</h2>
+            {% if page.summary %}
+            <p class="text-muted flex-grow-1">
+              {{ page.summary | striptags | truncate(length=190) }}
+            </p>
+            {% else %}
+            <p class="text-muted flex-grow-1">
+              {{ page.content | striptags | truncate(length=190) }}
+            </p>
+            {% endif %}
+            <a
+              href="{{ page.permalink }}"
+              class="fw-semibold text-decoration-none"
+              >Read more →</a
+            >
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}

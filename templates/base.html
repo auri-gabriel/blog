@@ -1,18 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% if page and page.title %}{{ page.title }} · {% elif section and
+      section.title %}{{ section.title }} · {% endif %}{{ config.title }}
+    </title>
+    <meta name="description" content="{{ config.description }}" />
+    <link rel="stylesheet" href="/style.css" media="all" />
+  </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MyBlog</title>
-    <link rel="stylesheet" href="/style.css" media="all">
-</head>
+  <body>
+    <header class="site-header border-bottom">
+      <nav
+        class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3"
+      >
+        <a class="site-brand text-decoration-none" href="/">Auri's Blog</a>
+        <ul class="nav nav-pills gap-2">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/posts/">Posts</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-    <section class="section">
-        {% block content %} {% endblock %}
-    </section>
+    <main class="site-main">{% block content %}{% endblock content %}</main>
 
     {% include "_footer.html" %}
-</body>
+  </body>
 </html>

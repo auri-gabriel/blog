@@ -1,10 +1,30 @@
-{% extends "index.html" %}
+{% extends "base.html" %} {% block content %}
+<section class="py-5 border-bottom">
+  <div class="container">
+    <h1 class="display-6 fw-bold mb-2">{{ taxonomy.name | title }}</h1>
+    <p class="text-muted mb-0">Browse posts by {{ taxonomy.name }}.</p>
+  </div>
+</section>
 
-{% block content %}
-<h1>Categories</h1>
-<ul>
-    {% for term in terms %}
-        <li><a href="{{ term.permalink }}">{{ term.name }} ({{ term.pages | length }})</a></li>
-    {% endfor %}
-</ul>
-{% endblock %}
+<section class="py-5">
+  <div class="container">
+    <div class="row g-3">
+      {% for term in terms %}
+      <div class="col-sm-6 col-lg-4">
+        <a
+          href="{{ term.permalink }}"
+          class="card h-100 border-0 shadow-sm text-decoration-none post-card"
+        >
+          <div class="card-body">
+            <h2 class="h5 mb-1">{{ term.name }}</h2>
+            <p class="text-muted mb-0 small">
+              {{ term.pages | length }} post(s)
+            </p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}
