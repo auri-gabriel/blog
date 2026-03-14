@@ -7,6 +7,9 @@
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -19,7 +22,11 @@ body {
 }
 
 .site-main {
-  min-height: 70vh;
+  flex: 1 0 auto;
+}
+
+body > footer {
+  margin-top: auto;
 }
 
 .post-page {
