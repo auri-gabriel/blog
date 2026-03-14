@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ lang }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,6 +12,56 @@
   </head>
 
   <body>
+    {% set is_pt = lang == "pt-br" %}
+    {% set home_url = "/" %}
+    {% set posts_url = "/posts/" %}
+    {% set categories_url = "/categories/" %}
+    {% set tags_url = "/tags/" %}
+
+    {% if is_pt %}
+      {% set home_url = "/pt-br/" %}
+      {% set posts_url = "/pt-br/posts/" %}
+      {% set categories_url = "/pt-br/categories/" %}
+      {% set tags_url = "/pt-br/tags/" %}
+    {% endif %}
+
+    {% set en_switch_url = "/" %}
+    {% set pt_switch_url = "/pt-br/" %}
+
+    {% if page %}
+      {% if page.lang == "en" %}
+        {% set en_switch_url = page.permalink %}
+      {% endif %}
+      {% if page.lang == "pt-br" %}
+        {% set pt_switch_url = page.permalink %}
+      {% endif %}
+
+      {% for translation in page.translations %}
+        {% if translation.lang == "en" %}
+          {% set_global en_switch_url = translation.permalink %}
+        {% endif %}
+        {% if translation.lang == "pt-br" %}
+          {% set_global pt_switch_url = translation.permalink %}
+        {% endif %}
+      {% endfor %}
+    {% elif section %}
+      {% if section.lang == "en" %}
+        {% set en_switch_url = section.permalink %}
+      {% endif %}
+      {% if section.lang == "pt-br" %}
+        {% set pt_switch_url = section.permalink %}
+      {% endif %}
+
+      {% for translation in section.translations %}
+        {% if translation.lang == "en" %}
+          {% set_global en_switch_url = translation.permalink %}
+        {% endif %}
+        {% if translation.lang == "pt-br" %}
+          {% set_global pt_switch_url = translation.permalink %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
     <nav
       class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top"
       style="z-index: 1000"
@@ -58,16 +108,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="{{ home_url }}">Home</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="/posts/">Posts</a>
+              <a class="nav-link" href="{{ posts_url }}">Posts</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="/categories/">Categories</a>
+              <a class="nav-link" href="{{ categories_url }}">Categories</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" href="/tags/">Tags</a>
+              <a class="nav-link" href="{{ tags_url }}">Tags</a>
+            </li>
+            <li class="nav-item d-flex align-items-center ms-lg-3">
+              <div class="btn-group btn-group-sm" role="group" aria-label="Language switcher">
+                <a href="{{ en_switch_url }}" class="btn {% if lang == "en" %}btn-primary{% else %}btn-outline-secondary{% endif %}">EN</a>
+                <a href="{{ pt_switch_url }}" class="btn {% if lang == "pt-br" %}btn-primary{% else %}btn-outline-secondary{% endif %}">PT-BR</a>
+              </div>
             </li>
           </ul>
         </div>
