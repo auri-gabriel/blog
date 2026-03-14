@@ -1,60 +1,102 @@
 {% extends "base.html" %} {% block content %} {% set blog_section =
 get_section(path="posts/_index.md") %}
 
-<section class="hero bg-light py-5 border-bottom">
+<section class="bg-light py-5 border-bottom">
   <div class="container">
-    <div class="col-lg-8 px-0">
-      <p class="text-uppercase text-primary fw-semibold small mb-2">
-        Software Engineering Blog
-      </p>
-      <h1 class="display-5 fw-bold mb-3">
-        Practical notes on building software
-      </h1>
-      <p class="lead text-muted mb-4">
-        Architecture choices, development workflows, and implementation details
-        from real projects.
-      </p>
-      <a href="/posts/" class="btn btn-primary">Browse posts</a>
+    <div class="row g-4 align-items-end">
+      <div class="col-lg-8">
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+          Personal Engineering Blog
+        </p>
+        <h1 class="display-5 fw-bold mb-3">
+          Building software, writing things down
+        </h1>
+        <p class="lead text-muted mb-0">
+          Notes on architecture, frontend systems, tooling, and shipping
+          thoughtful products.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="/posts/" class="btn btn-primary">View all posts</a>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="py-5">
   <div class="container">
+    {% if blog_section.pages | length > 0 %} {% set featured =
+    blog_section.pages[0] %}
+
+    <div class="mb-5">
+      <p class="text-uppercase text-muted fw-semibold small mb-2">Featured</p>
+      <article
+        class="card border-0 post-card post-card-featured position-relative"
+      >
+        <div class="card-body p-4 p-lg-5 d-flex flex-column">
+          <p class="post-card-meta mb-2">
+            {{ featured.date | date(format="%b %d, %Y") }} {% if
+            featured.reading_time %} · {{ featured.reading_time }} min read{%
+            endif %}
+          </p>
+          <h2 class="post-card-title h3 mb-3">
+            <a
+              href="{{ featured.permalink }}"
+              class="stretched-link text-decoration-none text-reset"
+              >{{ featured.title }}</a
+            >
+          </h2>
+          {% if featured.summary %}
+          <p class="post-card-excerpt mb-0">
+            {{ featured.summary | striptags | truncate(length=240) }}
+          </p>
+          {% else %}
+          <p class="post-card-excerpt mb-0">
+            {{ featured.content | striptags | truncate(length=240) }}
+          </p>
+          {% endif %}
+        </div>
+      </article>
+    </div>
+
     <div class="d-flex justify-content-between align-items-end mb-4">
       <h2 class="h3 mb-0">Latest posts</h2>
       <a href="/posts/" class="link-primary text-decoration-none"
         >View archive</a
       >
     </div>
+
     <div class="row g-4">
-      {% for post in blog_section.pages %}
+      {% for post in blog_section.pages %} {% if loop.index0 > 0 %}
       <article class="col-md-6 col-xl-4">
-        <div class="card h-100 border-0 shadow-sm post-card position-relative">
+        <div
+          class="card h-100 border-0 post-card post-entry-card position-relative"
+        >
           <div class="card-body d-flex flex-column">
-            <p class="text-muted small mb-2">
+            <p class="post-card-meta mb-2">
               {{ post.date | date(format="%b %d, %Y") }}
             </p>
-            <h3 class="h5 mb-2">{{ post.title }}</h3>
+            <h3 class="post-card-title h5 mb-2">{{ post.title }}</h3>
             {% if post.summary %}
-            <p class="text-muted mb-3 flex-grow-1">
+            <p class="post-card-excerpt mb-3 flex-grow-1">
               {{ post.summary | striptags | truncate(length=160) }}
             </p>
             {% else %}
-            <p class="text-muted mb-3 flex-grow-1">
+            <p class="post-card-excerpt mb-3 flex-grow-1">
               {{ post.content | striptags | truncate(length=160) }}
             </p>
             {% endif %}
             <a
               href="{{ post.permalink }}"
-              class="stretched-link text-decoration-none fw-semibold"
+              class="stretched-link text-decoration-none fw-semibold post-card-link"
               >Read post →</a
             >
           </div>
         </div>
       </article>
-      {% endfor %}
+      {% endif %} {% endfor %}
     </div>
+    {% endif %}
   </div>
 </section>
 {% endblock content %}
