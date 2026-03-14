@@ -17,52 +17,49 @@
       {% set i18n = load_data(path="i18n/pt-br.toml") %}
     {% endif %}
 
-    {% set is_pt = lang == "pt-br" %}
-    {% set home_url = "/" %}
-    {% set posts_url = "/posts/" %}
-    {% set categories_url = "/categories/" %}
-    {% set tags_url = "/tags/" %}
+    {% set home_section = get_section(path="_index.md", lang=lang) %}
+    {% set posts_section = get_section(path="posts/_index.md", lang=lang) %}
+    {% set en_home_section = get_section(path="_index.md", lang="en") %}
+    {% set pt_home_section = get_section(path="_index.md", lang="pt-br") %}
 
-    {% if is_pt %}
-      {% set home_url = "/pt-br/" %}
-      {% set posts_url = "/pt-br/posts/" %}
-      {% set categories_url = "/pt-br/categories/" %}
-      {% set tags_url = "/pt-br/tags/" %}
-    {% endif %}
+    {% set home_url = home_section.permalink %}
+    {% set posts_url = posts_section.permalink %}
+    {% set categories_url = home_section.permalink ~ "categories/" %}
+    {% set tags_url = home_section.permalink ~ "tags/" %}
 
-    {% set en_switch_url = "/" %}
-    {% set pt_switch_url = "/pt-br/" %}
+    {% set en_switch_url = en_home_section.permalink %}
+    {% set pt_switch_url = pt_home_section.permalink %}
 
     {% if page %}
       {% if page.lang == "en" %}
-        {% set en_switch_url = page.permalink | replace(from=config.base_url, to="") %}
+        {% set en_switch_url = page.permalink %}
       {% endif %}
       {% if page.lang == "pt-br" %}
-        {% set pt_switch_url = page.permalink | replace(from=config.base_url, to="") %}
+        {% set pt_switch_url = page.permalink %}
       {% endif %}
 
       {% for translation in page.translations %}
         {% if translation.lang == "en" %}
-          {% set_global en_switch_url = translation.permalink | replace(from=config.base_url, to="") %}
+          {% set_global en_switch_url = translation.permalink %}
         {% endif %}
         {% if translation.lang == "pt-br" %}
-          {% set_global pt_switch_url = translation.permalink | replace(from=config.base_url, to="") %}
+          {% set_global pt_switch_url = translation.permalink %}
         {% endif %}
       {% endfor %}
     {% elif section %}
       {% if section.lang == "en" %}
-        {% set en_switch_url = section.permalink | replace(from=config.base_url, to="") %}
+        {% set en_switch_url = section.permalink %}
       {% endif %}
       {% if section.lang == "pt-br" %}
-        {% set pt_switch_url = section.permalink | replace(from=config.base_url, to="") %}
+        {% set pt_switch_url = section.permalink %}
       {% endif %}
 
       {% for translation in section.translations %}
         {% if translation.lang == "en" %}
-          {% set_global en_switch_url = translation.permalink | replace(from=config.base_url, to="") %}
+          {% set_global en_switch_url = translation.permalink %}
         {% endif %}
         {% if translation.lang == "pt-br" %}
-          {% set_global pt_switch_url = translation.permalink | replace(from=config.base_url, to="") %}
+          {% set_global pt_switch_url = translation.permalink %}
         {% endif %}
       {% endfor %}
     {% else %}
@@ -72,17 +69,18 @@
       {% endif %}
 
       {% if current_path_value is starting_with("/pt-br/") or current_path_value == "/pt-br" %}
-        {% set en_switch_url = current_path_value | replace(from="/pt-br", to="") %}
-        {% if en_switch_url == "" %}
-          {% set en_switch_url = "/" %}
+        {% set en_switch_path = current_path_value | replace(from="/pt-br", to="") %}
+        {% if en_switch_path == "" %}
+          {% set en_switch_path = "/" %}
         {% endif %}
-        {% set pt_switch_url = current_path_value %}
+        {% set en_switch_url = config.base_url ~ en_switch_path %}
+        {% set pt_switch_url = config.base_url ~ current_path_value %}
       {% else %}
-        {% set en_switch_url = current_path_value %}
+        {% set en_switch_url = config.base_url ~ current_path_value %}
         {% if current_path_value == "/" %}
-          {% set pt_switch_url = "/pt-br/" %}
+          {% set pt_switch_url = config.base_url ~ "/pt-br/" %}
         {% else %}
-          {% set pt_switch_url = "/pt-br" ~ current_path_value %}
+          {% set pt_switch_url = config.base_url ~ "/pt-br" ~ current_path_value %}
         {% endif %}
       {% endif %}
     {% endif %}

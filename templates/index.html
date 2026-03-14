@@ -1,8 +1,7 @@
-{% extends "base.html" %} {% block content %} {% set posts_url = "/posts/" %} {%
-if lang == "pt-br" %} {% set posts_url = "/pt-br/posts/" %} {% endif %} {% set
-blog_section = get_section(path="posts/_index.md", lang=lang) %} {% set
-date_format_short = "%b %d, %Y" %} {% if lang == "pt-br" %} {% set
-date_format_short = "%d/%m/%Y" %} {% endif %}
+{% extends "base.html" %} {% block content %} {% set blog_section =
+get_section(path="posts/_index.md", lang=lang) %} {% set posts_url =
+blog_section.permalink %} {% set date_format_short = "%b %d, %Y" %} {% if lang
+== "pt-br" %} {% set date_format_short = "%d/%m/%Y" %} {% endif %}
 
 <section class="bg-light py-5 border-bottom">
   <div class="container">

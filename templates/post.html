@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set posts_url = "/posts/" %}
-{% if lang == "pt-br" %}
-{% set posts_url = "/pt-br/posts/" %}
-{% endif %}
+{% set posts_section = get_section(path="posts/_index.md", lang=lang) %}
+{% set posts_url = posts_section.permalink %}
 
 <article class="post-page">
     <header class="post-header bg-light border-bottom">
