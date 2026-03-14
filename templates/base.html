@@ -12,24 +12,87 @@
   </head>
 
   <body>
-    <header class="navbar bg-white border-bottom">
-      <nav
-        class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-3"
-      >
-        <a class="site-brand text-decoration-none" href="/">Auri's Blog</a>
-        <ul class="nav nav-pills gap-2">
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/posts/">Posts</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">Categories</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="/tags/">Tags</a></li>
-        </ul>
-      </nav>
-    </header>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top"
+      style="z-index: 1000"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center fw-bold text-decoration-none"
+          href="/"
+          title="Auri's Blog"
+        >
+          <h1 class="mb-0">
+            <span
+              class="me-3 p-2 bg-primary text-white d-flex align-items-center justify-content-center flex-shrink-0"
+              style="height: 32px; font-size: 1rem; font-weight: bold"
+              >AG</span
+            >
+          </h1>
+          <span
+            class="d-none d-xl-block text-dark"
+            style="
+              line-height: 1.2;
+              max-width: 300px;
+              font-size: 0.85rem;
+              overflow-wrap: break-word;
+              hyphens: auto;
+              white-space: normal;
+            "
+            >Auri's Blog · Software Engineering Notes</span
+          >
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item d-flex align-items-center">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a class="nav-link" href="/posts/">Posts</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a class="nav-link" href="/categories/">Categories</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a class="nav-link" href="/tags/">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <main class="site-main">{% block content %}{% endblock content %}</main>
 
     {% include "_footer.html" %}
+
+    <script>
+      document.addEventListener('click', function (event) {
+        const toggle = event.target.closest('[data-bs-toggle="collapse"]');
+        if (!toggle) return;
+
+        const targetSelector = toggle.getAttribute('data-bs-target');
+        if (!targetSelector) return;
+
+        const target = document.querySelector(targetSelector);
+        if (!target) return;
+
+        target.classList.toggle('show');
+        const expanded = target.classList.contains('show');
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    </script>
   </body>
 </html>
