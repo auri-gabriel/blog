@@ -1,10 +1,14 @@
 +++
 title = "I Miss Programming Before LLMs"
 date = 2026-03-14
+slug = "i-miss-programming-before-llms"
+description = "A personal reflection on how LLM-assisted coding changed the joy of solving problems by hand."
+translation_key = "i-miss-programming-before-llms"
+draft = false
 authors = ["Auri Gabriel"]
 [taxonomies]
 categories = ["Development", "Artificial Intelligence"]
-tags = ["blogging", "workflow"]
+tags = ["llms", "developer-experience", "software-craft", "workflow"]
 [extra]
 lead = "The lightbulb moments just don't happen anymore."
 +++

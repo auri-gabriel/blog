@@ -1,10 +1,14 @@
 +++
 title = "Eu sinto falta de programar antes dos LLMs"
 date = 2026-03-14
+slug = "sinto-falta-de-programar-antes-dos-llms"
+description = "Uma reflexão pessoal sobre como a programação assistida por LLMs mudou a alegria de resolver problemas por conta própria."
+translation_key = "i-miss-programming-before-llms"
+draft = false
 authors = ["Auri Gabriel"]
 [taxonomies]
 categories = ["Desenvolvimento", "Inteligência Artificial"]
-tags = ["blogging", "workflow"]
+tags = ["llms", "experiencia-do-desenvolvedor", "workflow"]
 [extra]
 lead = "Os momentos de \"lâmpada acendendo\" simplesmente não acontecem mais com tanta frequência."
 +++
