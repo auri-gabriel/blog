@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block content %} {% set blog_section =
-get_section(path="posts/_index.md") %}
+{% extends "base.html" %} {% block content %} {% set posts_url = "/posts/" %} {%
+if lang == "pt-br" %} {% set posts_url = "/pt-br/posts/" %} {% endif %} {% set
+blog_section = get_section(path="posts/_index.md", lang=lang) %}
 
 <section class="bg-light py-5 border-bottom">
   <div class="container">
@@ -17,7 +18,7 @@ get_section(path="posts/_index.md") %}
         </p>
       </div>
       <div class="col-lg-4 text-lg-end">
-        <a href="/posts/" class="btn btn-primary">View all posts</a>
+        <a href="{{ posts_url }}" class="btn btn-primary">View all posts</a>
       </div>
     </div>
   </div>
@@ -61,7 +62,7 @@ get_section(path="posts/_index.md") %}
 
     <div class="d-flex justify-content-between align-items-end mb-4">
       <h2 class="h3 mb-0">Latest posts</h2>
-      <a href="/posts/" class="link-primary text-decoration-none"
+      <a href="{{ posts_url }}" class="link-primary text-decoration-none"
         >View archive</a
       >
     </div>
