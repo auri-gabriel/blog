@@ -1,6 +1,7 @@
 +++
 title = "Engineering Journal: Building a Personal Blog Like a Product"
 date = 2026-03-10
+translation_key = "engineering-journal-product-blog"
 authors = ["Auri Gabriel"]
 [taxonomies]
 categories = ["Development", "Architecture"]

@@ -3,6 +3,7 @@ base_url = "https://aurigabriel.com/blog"
 
 title = "Auri's Blog"
 description = "Engineering notes, practical software development, and build logs."
+default_language = "en"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -24,3 +25,11 @@ theme = "github-dark"
 
 [extra]
 posts_section = "post"
+
+[languages.pt-br]
+title = "Blog do Auri"
+description = "Notas de engenharia, desenvolvimento de software e registros de construção."
+taxonomies = [
+    { name = "tags", feed = false },
+    { name = "categories", feed = false }
+]

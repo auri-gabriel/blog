@@ -7,7 +7,7 @@
             <div class="post-header-inner mx-auto">
                 <div class="post-kicker-row mb-3">
                     {% if page.taxonomies.categories %}
-                    <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0]) }}" class="post-kicker text-decoration-none">{{ page.taxonomies.categories[0] }}</a>
+                    <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0], lang=page.lang) }}" class="post-kicker text-decoration-none">{{ page.taxonomies.categories[0] }}</a>
                     {% else %}
                     <a href="/posts/" class="post-kicker text-decoration-none">Posts</a>
                     {% endif %}
@@ -37,7 +37,7 @@
                 {% if page.taxonomies.tags %}
                 <div class="post-tags mt-3">
                     {% for term in page.taxonomies.tags %}
-                    <a href="{{ get_taxonomy_url(kind="tags", name=term) }}" class="post-tag text-decoration-none">{{ term }}</a>
+                    <a href="{{ get_taxonomy_url(kind="tags", name=term, lang=page.lang) }}" class="post-tag text-decoration-none">{{ term }}</a>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -63,12 +63,12 @@
                 <div class="d-flex flex-wrap gap-2">
                     {% if page.taxonomies.categories %}
                     {% for term in page.taxonomies.categories %}
-                    <a href="{{ get_taxonomy_url(kind="categories", name=term) }}" class="post-tag text-decoration-none">{{ term }}</a>
+                    <a href="{{ get_taxonomy_url(kind="categories", name=term, lang=page.lang) }}" class="post-tag text-decoration-none">{{ term }}</a>
                     {% endfor %}
                     {% endif %}
                     {% if page.taxonomies.tags %}
                     {% for term in page.taxonomies.tags %}
-                    <a href="{{ get_taxonomy_url(kind="tags", name=term) }}" class="post-tag text-decoration-none">#{{ term }}</a>
+                    <a href="{{ get_taxonomy_url(kind="tags", name=term, lang=page.lang) }}" class="post-tag text-decoration-none">#{{ term }}</a>
                     {% endfor %}
                     {% endif %}
                 </div>
