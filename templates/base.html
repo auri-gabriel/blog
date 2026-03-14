@@ -30,27 +30,8 @@
       {% set tags_url = "/pt-br/tags/" %}
     {% endif %}
 
-    {% set current_path_value = current_path | default(value="/") %}
-    {% if current_path_value == "" %}
-      {% set current_path_value = "/" %}
-    {% endif %}
-
-    {% set en_switch_url = current_path_value %}
+    {% set en_switch_url = "/" %}
     {% set pt_switch_url = "/pt-br/" %}
-
-    {% if current_path_value is starting_with("/pt-br/") or current_path_value == "/pt-br" %}
-      {% set en_switch_url = current_path_value | replace(from="/pt-br", to="") %}
-      {% if en_switch_url == "" %}
-        {% set en_switch_url = "/" %}
-      {% endif %}
-      {% set pt_switch_url = current_path_value %}
-    {% else %}
-      {% if current_path_value == "/" %}
-        {% set pt_switch_url = "/pt-br/" %}
-      {% else %}
-        {% set pt_switch_url = "/pt-br" ~ current_path_value %}
-      {% endif %}
-    {% endif %}
 
     {% if page %}
       {% if page.lang == "en" %}
@@ -84,6 +65,26 @@
           {% set_global pt_switch_url = translation.permalink | replace(from=config.base_url, to="") %}
         {% endif %}
       {% endfor %}
+    {% else %}
+      {% set current_path_value = current_path | default(value="/") %}
+      {% if current_path_value == "" %}
+        {% set current_path_value = "/" %}
+      {% endif %}
+
+      {% if current_path_value is starting_with("/pt-br/") or current_path_value == "/pt-br" %}
+        {% set en_switch_url = current_path_value | replace(from="/pt-br", to="") %}
+        {% if en_switch_url == "" %}
+          {% set en_switch_url = "/" %}
+        {% endif %}
+        {% set pt_switch_url = current_path_value %}
+      {% else %}
+        {% set en_switch_url = current_path_value %}
+        {% if current_path_value == "/" %}
+          {% set pt_switch_url = "/pt-br/" %}
+        {% else %}
+          {% set pt_switch_url = "/pt-br" ~ current_path_value %}
+        {% endif %}
+      {% endif %}
     {% endif %}
 
     <nav
