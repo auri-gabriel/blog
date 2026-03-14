@@ -1,36 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<article>
-    <header class="py-5 border-bottom">
-        <div class="container">
-            <div class="col-lg-8 px-0">
-                <nav aria-label="breadcrumb" class="mb-3">
-                    <ol class="breadcrumb small mb-0">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/posts/">Posts</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
-                    </ol>
-                </nav>
+<article class="post-page">
+    <header class="post-header border-bottom">
+        <div class="container py-4 py-lg-5">
+            <div class="post-header-inner mx-auto">
+                <div class="post-kicker-row mb-3">
+                    {% if page.taxonomies.categories %}
+                    <a href="{{ get_taxonomy_url(kind="categories", name=page.taxonomies.categories[0]) }}" class="post-kicker text-decoration-none">{{ page.taxonomies.categories[0] }}</a>
+                    {% else %}
+                    <a href="/posts/" class="post-kicker text-decoration-none">Posts</a>
+                    {% endif %}
+                </div>
 
-                <h1 class="display-6 fw-bold mb-3">{{ page.title }}</h1>
+                <h1 class="post-headline mb-3">{{ page.title }}</h1>
 
                 {% if page.extra.lead %}
-                <p class="lead text-muted mb-4">{{ page.extra.lead }}</p>
+                <p class="post-deck mb-4">{{ page.extra.lead }}</p>
                 {% endif %}
 
-                <ul class="list-inline text-muted small mb-0">
-                    <li class="list-inline-item me-3">{{ page.date | date(format="%b %d, %Y") }}</li>
-                    <li class="list-inline-item me-3">{{ page.reading_time }} min read</li>
-                    {% for author in page.authors %}
-                    <li class="list-inline-item me-3">{{ author }}</li>
-                    {% endfor %}
-                </ul>
+                <div class="post-byline-wrap pt-3 border-top">
+                    <div class="post-byline">
+                        {% if page.authors and page.authors | length > 0 %}
+                        <span>By {{ page.authors | join(sep=", ") }}</span>
+                        {% else %}
+                        <span>By Editorial Team</span>
+                        {% endif %}
+                    </div>
+                    <div class="post-meta text-muted">
+                        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+                        <span aria-hidden="true">•</span>
+                        <span>{{ page.reading_time }} min read</span>
+                    </div>
+                </div>
 
-                {% if page.taxonomies.categories %}
-                <div class="mt-3 d-flex flex-wrap gap-2">
-                    {% for term in page.taxonomies.categories %}
-                    <a href="{{ get_taxonomy_url(kind="categories", name=term) }}" class="badge text-bg-light text-decoration-none">{{ term }}</a>
+                {% if page.taxonomies.tags %}
+                <div class="post-tags mt-3">
+                    {% for term in page.taxonomies.tags %}
+                    <a href="{{ get_taxonomy_url(kind="tags", name=term) }}" class="post-tag text-decoration-none">{{ term }}</a>
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -38,13 +45,35 @@
         </div>
     </header>
 
-    <section class="py-5">
+    <section class="post-body py-4 py-lg-5">
         <div class="container">
-            <div class="col-lg-8 px-0">
-                <div class="prose">
+            <div class="post-article-wrap mx-auto">
+                <div class="post-prose">
                     {{ page.content | safe }}
                 </div>
+
+                <footer class="post-endnote mt-5 pt-3 border-top">
+                    <a href="/posts/" class="text-decoration-none">← Back to all posts</a>
+                </footer>
             </div>
+
+            {% if page.taxonomies.categories or page.taxonomies.tags %}
+            <div class="post-topic-bar mx-auto mt-5 pt-3 border-top">
+                <p class="text-uppercase text-muted small fw-semibold mb-2">Filed under</p>
+                <div class="d-flex flex-wrap gap-2">
+                    {% if page.taxonomies.categories %}
+                    {% for term in page.taxonomies.categories %}
+                    <a href="{{ get_taxonomy_url(kind="categories", name=term) }}" class="post-tag text-decoration-none">{{ term }}</a>
+                    {% endfor %}
+                    {% endif %}
+                    {% if page.taxonomies.tags %}
+                    {% for term in page.taxonomies.tags %}
+                    <a href="{{ get_taxonomy_url(kind="tags", name=term) }}" class="post-tag text-decoration-none">#{{ term }}</a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </section>
 </article>
